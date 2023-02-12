@@ -5,6 +5,6 @@ export class AppController {
     @Get()
     @Render('index')
     getHello() {
-        return {message: 'Hello world!'};
+        return {message: 'Hello world!'.split('')};
     }
 }
