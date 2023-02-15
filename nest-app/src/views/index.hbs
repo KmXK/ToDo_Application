@@ -1,5 +1,59 @@
-<ul class="list-disc">
-    {{#each tasks}}
-        <li>{{ this.value }}</li>
-    {{/each}}
-</ul>
+
+<!--    <div class="container mb-3">-->
+<!--        <form action="/" method="get">-->
+<!--            <div class="row">-->
+<!--                <label for="filter" class="form-label col-1 col-form-label">filter:</label>-->
+<!--                <div class="col-4">-->
+<!--                    <select class="form-select" id="filter" name="filter">-->
+<!--                        <option selected value="All">All</option>-->
+<!--                        <% for (var i=0; i < statuses.length; i++) { %>-->
+<!--                        <option value="<%= statuses[i].id %>">-->
+<!--                            <%= statuses[i].name %>-->
+<!--                        </option>-->
+<!--                        <% } %>-->
+
+<!--                        &lt;!&ndash; <option value="Not started">Not started</option>-->
+<!--                <option value="In progress">In progress</option>-->
+<!--                <option value="Completed">Completed</option> &ndash;&gt;-->
+<!--                    </select>-->
+<!--                </div>-->
+<!--                <button class="btn btn-primary col-2" type="submit">Show results</button>-->
+<!--            </div>-->
+<!--        </form>-->
+<!--    </div>-->
+
+    <a class="btn btn-primary container-fluid mb-2" href="/add-task-form">Add Task</a>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th class="text-center">Name</th>
+            <th class="text-center">Status</th>
+            <th class="text-center">Creation Date</th>
+            <th class="text-center">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each tasks}}
+        <tr class="align-middle">
+            <td class="text-center">
+                {{this.title}}
+            </td>
+            <td class="text-center">
+                <span class="badge bg-{{this.statusColor}}">
+                    {{this.status}}
+                </span>
+            </td>
+            <td class="text-center">
+                {{this.creationDate}}
+            </td>
+            <td class="text-center">
+                <form action="/remove" method="post">
+                    <input type="hidden" id="taskId" name="id" value="{{this.id}}">
+                    <button type="submit" class="btn btn-danger">Remove</button>
+                </form>
+            </td>
+        </tr>
+        {{/each}}
+        </tbody>
+    </table>
