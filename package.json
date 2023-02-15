@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/KmXK/ToDo_Application#readme",
   "dependencies": {
+    "@nestjs/typeorm": "^9.0.1",
     "hbs": "4.2.0",
     "mssql": "^7.3.5",
     "typeorm": "^0.3.12"
