@@ -1,5 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { BeforeInsert, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { Status } from './status.entity';
+import { v4 as uuid } from 'uuid';
 
 @Entity({
     name: 'Tasks'
@@ -19,4 +20,11 @@ export default class Task {
 
     @Column({ name: 'status_id' })
     status: Status;
+
+    @BeforeInsert()
+    generateId() {
+        if (!this.id) {
+            this.id = uuid();
+        }
+    }
 }
