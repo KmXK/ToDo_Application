@@ -29,7 +29,7 @@ export class TaskController {
     }
 
     @Post('remove')
-    @Redirect('list')
+    @Redirect('/')
     async deleteTask(@Body() id: string) {
         await this.taskService.deleteTask(id);
     }

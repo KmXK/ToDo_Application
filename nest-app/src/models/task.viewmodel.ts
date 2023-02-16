@@ -1,6 +1,6 @@
 import { Status } from "../domain/entities/status.entity";
 
-export class TaskViewmodel {
+export class TaskViewModel {
     id: string;
     title: string;
     creationDate: string;

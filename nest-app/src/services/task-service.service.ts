@@ -1,10 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import Task from '../domain/entities/task.entity';
-import { TaskViewmodel } from '../models/task.viewmodel';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { TaskStatusViewModel } from "../models/taskStatus.viewmodel";
 import { Status } from "../domain/entities/status.entity";
+import { TaskViewModel } from '../models/task.viewmodel';
 
 @Injectable()
 export class TaskService {
@@ -14,7 +13,7 @@ export class TaskService {
     ) {
     }
 
-    public getTasks(): Promise<TaskViewmodel[]> {
+    public getTasks(): Promise<TaskViewModel[]> {
         return this.taskRepository.find()
             .then(tasks => tasks.map(task => ({
             ...task,
