@@ -1,6 +1,5 @@
-import { BadRequestException, Body, Controller, Delete, Get, Param, Post, Redirect, Render, Res } from '@nestjs/common';
+import { Body, Controller, Get, Post, Redirect, Render } from '@nestjs/common';
 import { TaskService } from './services/task-service.service';
-import { RedirectResponse } from '@nestjs/core/router/router-response-controller';
 
 @Controller()
 export class AppController {
@@ -15,7 +14,7 @@ export class AppController {
         const tasks = await this.taskService.getTasks();
 
         return {
-            tasks: await this.taskService.getTasks()
+            tasks
         }
     }
 

@@ -3,7 +3,6 @@ import Task from '../domain/entities/task.entity';
 import { TaskViewModel } from '../models/taskViewModel';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Status } from '../domain/entities/status.entity';
 
 @Injectable()
 export class TaskService {
@@ -17,28 +16,12 @@ export class TaskService {
         return this.taskRepository.find()
             .then(tasks => tasks.map(task => ({
             ...task,
-            statusColor: this.getStatusColor(task.status),
-            creationDate: new Date(task.creationDate).toLocaleDateString('en-us'),
-            status: Status[task.status]
+            creationDate: new Date(task.creationDate).toLocaleDateString('en-us')
         })));
     }
 
-    public deleteTask(id: string): Promise<boolean> {
-        return this.taskRepository.delete(id)
-            .then(_ => true)
-            .catch(_ => false);
-    }
-
-    private getStatusColor(status: Status): string {
-        switch(status) {
-            case Status.ToDo:
-                return 'secondary';
-            case Status.InProgress:
-                return 'primary';
-            case Status.Done:
-                return 'success';
-        }
-
-        return '';
+    public async deleteTask(id: string): Promise<boolean> {
+        const result = await this.taskRepository.delete(id);
+        return !!result.affected;
     }
 }
