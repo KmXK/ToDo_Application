@@ -1,15 +1,15 @@
 import { Body, Controller, Get, Post, Redirect, Render } from '@nestjs/common';
-import { TaskService } from './services/task-service.service';
+import { TaskService } from "../../services/task-service.service";
 
-@Controller()
-export class AppController {
+@Controller('task')
+export class TaskController {
     constructor(
         private readonly taskService: TaskService
     ) {
     }
 
-    @Get()
-    @Render('index')
+    @Get('')
+    @Render('task-list')
     async tasks() {
         const tasks = await this.taskService.getTasks();
 
@@ -18,8 +18,18 @@ export class AppController {
         }
     }
 
+    @Get('add')
+    @Render('add-task')
+    async addTask() {
+        const statuses = this.taskService.getTaskStatuses();
+
+        return {
+            statuses
+        };
+    }
+
     @Post('remove')
-    @Redirect('/')
+    @Redirect('list')
     async deleteTask(@Body() id: string) {
         await this.taskService.deleteTask(id);
     }

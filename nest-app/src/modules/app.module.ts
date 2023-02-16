@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
-import { TaskService } from './services/task-service.service';
-import TaskEntity from "./domain/entities/task.entity";
+import { TaskModule } from './task-module/task.module';
+import TaskEntity from "../domain/entities/task.entity";
+import { TaskController } from "./task-module/taskr.controller";
 
 @Module({
   imports: [
@@ -18,9 +19,9 @@ import TaskEntity from "./domain/entities/task.entity";
               encrypt: false
           }
       }),
-      TypeOrmModule.forFeature([TaskEntity])
+      TaskModule
   ],
   controllers: [AppController],
-  providers: [TaskService],
+  providers: [],
 })
 export class AppModule {}
